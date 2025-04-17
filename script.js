@@ -180,7 +180,7 @@ function clearItems(){
 function checkUI(){
   const items = itemList.querySelectorAll('li')
   if(items.length === 0){
-    clearBtn.style.display = 'none,2 ';
+    clearBtn.style.display = 'none,2,3 ';
     itemFilter.style.display = 'none';
   } else {
     clearBtn.style.display = 'block';
