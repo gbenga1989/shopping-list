@@ -113,7 +113,7 @@ const clearBtn = document.getElementById('clear')
 const itemFilter = document.getElementById('filter')
 
 
-function addItem(e){
+function onAddItemSubmit(e){
   e.preventDefault();
 
   const newItem = itemInput.value 
@@ -124,9 +124,20 @@ function addItem(e){
     return;
   }
 
+  // create itom dom element
+ addItemToDOM(newItem);
+
+//  Add item to local storage
+addItemToStorage(newItem);
+ checkUI();
+
+ itemInput.value = '';
+}
+
+function addItemToDOM(item){
   // create list intem
   const li = document.createElement('li');
-  li.appendChild(document.createTextNode(newItem))
+  li.appendChild(document.createTextNode(item))
 
  const button = createButton('remove-item btn-link text-red');
  
@@ -136,10 +147,22 @@ function addItem(e){
  
 
  itemList.appendChild(li);
+}
 
- checkUI();
+function addItemToStorage(item){
+  let itemsFromstorage;
 
- itemInput.value = '';
+  if (localStorage.getItem('items') === null){
+    itemsFromstorage = [];
+
+  }else {
+    itemsFromstorage = JSON.parse(localStorage.getItem('items'));
+  }
+  // Add new item to array
+  itemsFromstorage.push(item);
+
+  // convert to json string and set to local storage
+  localStorage.setItem('items', JSON.stringify(itemsFromstorage))
 }
 
 function createButton(classes){
@@ -177,6 +200,21 @@ function clearItems(){
   checkUI();
 }
 
+function filterItems(e){
+  const items = itemList.querySelectorAll('li');
+  const text = e.target.value.toLowerCase();
+
+  items.forEach(item => {
+    const itemName = item.firstChild.textContent.toLowerCase();
+
+    if(itemName.indexOf(text) != -1){
+      item.style.display = 'flex';
+    }else {
+      item.style.display = 'none';
+    }
+  })
+}
+
 function checkUI(){
   const items = itemList.querySelectorAll('li')
   if(items.length === 0){
@@ -190,9 +228,10 @@ function checkUI(){
 
 
 // Event listeners
-itemForm.addEventListener('submit', addItem);
+itemForm.addEventListener('submit', onAddItemSubmit);
 itemList.addEventListener('click', removeItem);
 itemList.addEventListener('click', removeItem);
 clearBtn.addEventListener('click', clearItems);
+itemFilter.addEventListener('input', filterItems);
 
 checkUI();
