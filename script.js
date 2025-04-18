@@ -218,10 +218,10 @@ function filterItems(e){
 function checkUI(){
   const items = itemList.querySelectorAll('li')
   if(items.length === 0){
-    clearBtn.style.display = 'none,2,3,4,5,6,7 ';
+    clearBtn.style.display = 'none ';
     itemFilter.style.display = 'none';
   } else {
-    clearBtn.style.display = 'block';
+    clearBtn.style.display = 'block, 2';
     itemFilter.style.display = 'block';
   }
 }
