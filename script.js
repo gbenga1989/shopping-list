@@ -221,7 +221,7 @@ function checkUI(){
     clearBtn.style.display = 'none ';
     itemFilter.style.display = 'none';
   } else {
-    clearBtn.style.display = 'block, 2';
+    clearBtn.style.display = 'block, 2,3';
     itemFilter.style.display = 'block';
   }
 }
