@@ -234,4 +234,4 @@ itemList.addEventListener('click', removeItem);
 clearBtn.addEventListener('click', clearItems);
 itemFilter.addEventListener('input', filterItems);
 
-checkUI(1,2,3);
+checkUI(1,2,3,4);
